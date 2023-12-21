@@ -54,7 +54,7 @@ const NewTask = () => {
     <div>
       <Title title="Create Task" />
       <div className="relative flex flex-col justify-center h-[calc(100vh-100px)] overflow-auto">
-        <div className="w-full p-6 m-auto bg-white dark:bg-gray-800  shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
+        <div className="w-full p-6 m-auto bg-white dark:bg-gray-800  shadow-xl ring-1 ring-success lg:max-w-xl">
           <h1 className="text-3xl font-semibold text-center text-gray-400">
             Create Task
           </h1>

@@ -1,11 +1,13 @@
 import Title from "../../../components/Title/Title";
 import { MdOutlineDateRange } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
+import useFetchTask from "../../../hooks/useFetchTask";
 const TodoList = () => {
+  const { data } = useFetchTask("todo");
+  console.log(data);
   return (
     <div>
       <Title title="Todo List" />
-
       <div className="mt-8 spy">
         <div className="bg-blue-200 p-4 border  border-blue-400">
           <h1 className="text-2xl font-semibold text-gray-700">

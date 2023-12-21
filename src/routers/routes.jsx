@@ -10,6 +10,8 @@ import TodoList from "../pages/Dashboard/TodoList/TodoList";
 import Login from "../pages/auth/Login";
 import Registation from "../pages/auth/Registation";
 import PribetRoutes from "./PribetRoutes";
+import OngoingList from "../pages/Dashboard/OngoingLIst/OngoingList";
+import Complete from "../pages/Dashboard/Complete/Complete";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: "todo-list",
         element: <TodoList />,
+      },
+      {
+        path: "ongoing-list",
+        element: <OngoingList />,
+      },
+      {
+        path: "complete-list",
+        element: <Complete />,
       },
     ],
   },

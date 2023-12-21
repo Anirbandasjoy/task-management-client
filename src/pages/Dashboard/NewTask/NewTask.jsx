@@ -1,3 +1,4 @@
+import axios from "axios";
 import Title from "../../../components/Title/Title";
 import { useForm, Controller } from "react-hook-form";
 
@@ -8,9 +9,21 @@ const NewTask = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log("Submitted");
+  const onSubmit = async (data) => {
+    try {
+      const { title, description, deadline, priority } = data;
+      const taskInformation = { title, description, deadline, priority };
+      console.log(taskInformation);
+
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/create-task",
+        taskInformation
+      );
+
+      console.log("Server Response:", response.data);
+    } catch (error) {
+      console.error("Error during request:", error);
+    }
   };
 
   return (

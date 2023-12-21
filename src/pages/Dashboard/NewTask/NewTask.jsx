@@ -1,8 +1,12 @@
 import axios from "axios";
 import Title from "../../../components/Title/Title";
+import Swal from "sweetalert2";
 import { useForm, Controller } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthProvider";
 
 const NewTask = () => {
+  const { user } = useContext(AuthContext);
   const {
     handleSubmit,
     control,
@@ -12,15 +16,35 @@ const NewTask = () => {
   const onSubmit = async (data) => {
     try {
       const { title, description, deadline, priority } = data;
-      const taskInformation = { title, description, deadline, priority };
+      const taskInformation = {
+        title,
+        description,
+        deadline,
+        priority,
+        email: user?.email,
+        status: "todo",
+      };
       console.log(taskInformation);
 
       const response = await axios.post(
         "http://localhost:5000/api/v1/create-task",
         taskInformation
       );
-
       console.log("Server Response:", response.data);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Message Send Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "sweetalert-custom-popup",
+          title: "sweetalert-custom-title", // Custom class for the title
+          content: "sweetalert-custom-content", // Custom class for the content
+          background: "sweetalert-custom-background",
+        },
+        backdrop: false,
+      });
     } catch (error) {
       console.error("Error during request:", error);
     }
@@ -70,7 +94,7 @@ const NewTask = () => {
                 render={({ field }) => (
                   <textarea
                     {...field}
-                    className="textarea dark:bg-gray-700 dark:text-white textarea-bordered w-full"
+                    className="textarea dark:bg-gray-700 dark:text-white textarea-bordered w-full resize-none"
                     placeholder="Description"
                   ></textarea>
                 )}
@@ -130,7 +154,7 @@ const NewTask = () => {
               )}
             </div>
             <div>
-              <button className="btn btn-block rounded-sm bg-success text-white hover:bg-success">
+              <button className="btn btn-block rounded-sm bg-success border-none text-white hover:bg-success">
                 Save
               </button>
             </div>

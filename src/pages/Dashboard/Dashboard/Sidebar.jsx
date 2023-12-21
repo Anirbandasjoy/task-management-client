@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
+import Swal from "sweetalert2";
 // Components
 // import Logo from "../../Shared/Logo";
 import MenuItem from "./Menuitem";
 // import ToggleBtn from '../../Button/ToggleBtn'
+
 // Icons
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
@@ -14,7 +16,6 @@ import { MdOutlineCallMissedOutgoing } from "react-icons/md";
 import { MdIncompleteCircle } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
-import toast from "react-hot-toast";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
@@ -22,7 +23,20 @@ const Sidebar = () => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       logOut().then(() => {
-        toast.success("Logout successfully");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Message Send Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            popup: "sweetalert-custom-popup",
+            title: "sweetalert-custom-title", // Custom class for the title
+            content: "sweetalert-custom-content", // Custom class for the content
+            background: "sweetalert-custom-background",
+          },
+          backdrop: false,
+        });
         navigate("/login");
       });
     }

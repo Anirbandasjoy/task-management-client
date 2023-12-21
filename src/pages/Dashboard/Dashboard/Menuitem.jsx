@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 
-const MenuItem = ({ label, address, icon: Icon }) => {
+const MenuItem = ({ label, address, icon: Icon, count }) => {
   return (
     <NavLink
       to={address}
@@ -17,6 +17,11 @@ const MenuItem = ({ label, address, icon: Icon }) => {
       <Icon className="w-5 h-5" />
 
       <span className="mx-4 font-medium">{label}</span>
+      {count && (
+        <div className="bg-success p-2  rounded-full text-xs h-6 flex justify-center items-center font-semibold text-gray-200">
+          {count}
+        </div>
+      )}
     </NavLink>
   );
 };

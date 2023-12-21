@@ -13,20 +13,20 @@ const TodoList = () => {
           return (
             <div
               key={task?._id}
-              className="bg-blue-100 p-4 border cursor-pointer border-blue-200"
+              className="bg-gray-100 dark:bg-gray-800 p-4 border cursor-pointer border-blue-200"
             >
-              <h1 className="text-2xl font-semibold text-gray-700">
+              <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">
                 {task?.title}
               </h1>
-              <p className="mt-2">{task?.description}</p>
+              <p className="mt-2 dark:text-gray-300">{task?.description}</p>
               <div className="mt-4 flex items-center gap-4">
                 <div className="flex  items-center gap-2">
-                  <MdOutlineDateRange />
-                  <h2>{task?.deadline}</h2>
+                  <MdOutlineDateRange className="dark:text-gray-300" />
+                  <h2 className="dark:text-gray-300">{task?.deadline}</h2>
                 </div>
                 <div className="flex items-center gap-2">
-                  <RxUpdate />
-                  <h2>{task?.priority}</h2>
+                  <RxUpdate className="dark:text-gray-300" />
+                  <h2 className="dark:text-gray-300">{task?.priority}</h2>
                 </div>
               </div>
             </div>

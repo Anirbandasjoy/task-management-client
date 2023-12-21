@@ -4,9 +4,13 @@ import Swal from "sweetalert2";
 import { useForm, Controller } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
+import useFetchTask from "../../../hooks/useFetchTask";
 
 const NewTask = () => {
   const { user } = useContext(AuthContext);
+  const { refetch } = useFetchTask("todo");
+  const { refetch: ongoingfetch } = useFetchTask("ongoing");
+  const { refetch: completefetch } = useFetchTask("complete");
   const {
     handleSubmit,
     control,
@@ -45,6 +49,9 @@ const NewTask = () => {
         },
         backdrop: false,
       });
+      refetch();
+      completefetch();
+      ongoingfetch();
     } catch (error) {
       console.error("Error during request:", error);
     }

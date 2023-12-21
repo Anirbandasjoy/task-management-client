@@ -16,6 +16,7 @@ import { MdOutlineCallMissedOutgoing } from "react-icons/md";
 import { MdIncompleteCircle } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
+import useFetchTask from "../../../hooks/useFetchTask";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
@@ -41,6 +42,10 @@ const Sidebar = () => {
       });
     }
   };
+
+  const { data: todo } = useFetchTask("todo");
+  const { data: ongoing } = useFetchTask("ongoing");
+  const { data: complete } = useFetchTask("complete");
 
   //   const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(false);
@@ -105,16 +110,19 @@ const Sidebar = () => {
                 icon={CiBoxList}
                 label="Todo List"
                 address="/dashboard/todo-list"
+                count={todo?.length}
               />
               <MenuItem
                 icon={MdOutlineCallMissedOutgoing}
                 label="Ongoing List"
                 address="/dashboard/ongoing-list"
+                count={ongoing?.length}
               />
               <MenuItem
                 icon={MdIncompleteCircle}
                 label="Complete List"
                 address="/dashboard/complete-list"
+                count={complete?.length}
               />
 
               {/* Menu Items */}

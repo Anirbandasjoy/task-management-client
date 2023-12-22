@@ -13,6 +13,8 @@ import PribetRoutes from "./PribetRoutes";
 import OngoingList from "../pages/Dashboard/OngoingLIst/OngoingList";
 import Complete from "../pages/Dashboard/Complete/Complete";
 import UpdateTask from "../pages/Dashboard/UpdateTask/UpdateTask";
+import About from "../pages/About/About";
+import Contact from "../pages/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

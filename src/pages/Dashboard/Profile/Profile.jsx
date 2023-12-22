@@ -10,18 +10,16 @@ const Profile = () => {
           Profile
         </h1>
       </div>
-      <div className="flex text-center justify-center items-center h-[calc(100vh-250px)]">
+      <div className="flex text-center justify-center items-center h-[calc(100vh-210px)]">
         <div className="text-center">
-          {" "}
-          <div className="w-36 h-36 mx-auto">
-            {" "}
+          <div className="w-36 h-36 mx-auto" data-aos="zoom-in">
             <img
               className="rounded-full w-full h-full"
               src={user?.photoURL}
               alt="profileImage"
             />
           </div>
-          <h1 className="text-2xl mt-4 font-semibold">
+          <h1 className="text-2xl mt-4 dark:text-gray-300 font-semibold">
             Welcome, {user?.displayName} {/* Corrected typo in 'Welcome' */}
           </h1>
         </div>

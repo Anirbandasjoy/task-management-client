@@ -74,9 +74,12 @@ const DashboardHome = () => {
       </div>
 
       <div className="mt-7 flex lg:justify-between flex-col lg:flex-row gap-10  lg:gap-20">
-        <div className="bg-gray-200 shadow-md p-4 dark:bg-slate-800 w-full rounded-md">
+        <div
+          className="bg-gray-200 shadow-md p-4 dark:bg-slate-800 w-full rounded-md"
+          data-aos="zoom-in"
+        >
           <div className="flex gap-3">
-            <MdIncompleteCircle className="dark:text-gray-400" size={80} />
+            <MdIncompleteCircle className=" text-success" size={80} />
             <div>
               <h2 className="text-lg dark:text-gray-300 ">Complete</h2>
               <h3 className="text-4xl font-bold dark:text-gray-300">
@@ -85,9 +88,12 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-200 shadow-md p-4 dark:bg-slate-800 w-full rounded-md">
+        <div
+          className="bg-gray-200 shadow-md p-4 dark:bg-slate-800 w-full rounded-md"
+          data-aos="zoom-in"
+        >
           <div className="flex gap-3">
-            <SiTodoist className="dark:text-gray-400" size={80} />
+            <SiTodoist className=" text-secondary" size={80} />
             <div>
               <h2 className="text-lg  dark:text-gray-300">Todo</h2>
               <h3 className="text-4xl font-bold dark:text-gray-300">
@@ -96,9 +102,12 @@ const DashboardHome = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-200 shadow-md p-4 dark:bg-slate-800 w-full rounded-md">
+        <div
+          className="bg-gray-200 shadow-md p-4 dark:bg-slate-800 w-full rounded-md"
+          data-aos="zoom-in"
+        >
           <div className="flex gap-3">
-            <SiMongoosedotws className="dark:text-gray-400" size={80} />
+            <SiMongoosedotws className=" text-error" size={80} />
             <div>
               <h2 className="text-lg dark:text-gray-300 ">Ongoing</h2>
               <h3 className="text-4xl font-bold dark:text-gray-300">

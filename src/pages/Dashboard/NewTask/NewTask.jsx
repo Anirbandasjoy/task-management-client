@@ -79,6 +79,7 @@ const NewTask = () => {
                     type="text"
                     placeholder="Title"
                     className="w-full input input-bordered dark:bg-gray-700 dark:text-white"
+                    data-aos="zoom-in"
                   />
                 )}
                 name="title"
@@ -103,6 +104,7 @@ const NewTask = () => {
                     {...field}
                     className="textarea dark:bg-gray-700 dark:text-white textarea-bordered w-full resize-none"
                     placeholder="Description"
+                    data-aos="zoom-in"
                   ></textarea>
                 )}
                 name="description"
@@ -127,6 +129,7 @@ const NewTask = () => {
                     {...field}
                     type="date"
                     className="w-full dark:bg-gray-700 dark:text-white input input-bordered"
+                    data-aos="zoom-in"
                   />
                 )}
                 name="deadline"
@@ -144,6 +147,7 @@ const NewTask = () => {
                   <select
                     {...field}
                     className="w-full dark:bg-gray-700 dark:text-white input input-bordered"
+                    data-aos="zoom-in"
                   >
                     <option value="low">Low</option>
                     <option value="moderate">Moderate</option>
@@ -161,7 +165,7 @@ const NewTask = () => {
                 </span>
               )}
             </div>
-            <div>
+            <div data-aos="zoom-in">
               <button className="btn btn-block rounded-sm bg-success border-none text-white hover:bg-success">
                 Save
               </button>

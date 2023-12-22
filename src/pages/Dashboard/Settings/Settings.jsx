@@ -6,7 +6,10 @@ const Settings = () => {
   return (
     <div>
       <Title title="Settings" />
-      <div className="p-3 px-4   flex lg:w-5/12 w-full bg-gray-50 dark:bg-gray-800 dark:text-gray-200  border-2 mt-14 justify-between items-center dark:border-gray-800">
+      <div
+        className="p-3 px-4   flex lg:w-5/12 w-full bg-gray-50 dark:bg-gray-800 dark:text-gray-200  border-2 mt-14 justify-between items-center dark:border-gray-800"
+        data-aos="zoom-in"
+      >
         <div>
           <h1 className="text-2xl uppercase text-gray-500 font-semibold ">
             Toggle Theme

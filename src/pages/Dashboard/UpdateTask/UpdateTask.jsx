@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetchSingleTask from "../../../hooks/useFetchSingleTask";
 import { Controller, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -12,7 +12,6 @@ const UpdateTask = () => {
   const { id } = useParams();
   const { data } = useFetchSingleTask(id);
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
   const { refetch } = useFetchTask("todo");
   const { refetch: ongoingfetch } = useFetchTask("ongoing");
   const { refetch: completefetch } = useFetchTask("complete");
@@ -29,19 +28,20 @@ const UpdateTask = () => {
       setValue("description", data.description);
       setValue("deadline", data.deadline);
       setValue("priority", data.priority);
+      setValue("status", data?.status);
     }
   }, [data, setValue]);
 
   const onSubmit = async (data) => {
     try {
-      const { title, description, deadline, priority } = data;
+      const { title, description, deadline, priority, status } = data;
       const taskInformation = {
         title,
         description,
         deadline,
         priority,
         email: user?.email,
-        status: "todo",
+        status: status,
       };
       console.log({ taskInformation });
       const response = await axios.put(
@@ -68,7 +68,6 @@ const UpdateTask = () => {
       refetch();
       completefetch();
       ongoingfetch();
-      navigate("/dashboard/todo-list");
     } catch (error) {
       console.error("Error during request:", error);
     }
@@ -97,6 +96,7 @@ const UpdateTask = () => {
                     placeholder="Title"
                     defaultValue={data?.title}
                     className="w-full input input-bordered dark:bg-gray-700 dark:text-white"
+                    data-aos="zoom-in"
                   />
                 )}
                 name="title"
@@ -122,6 +122,7 @@ const UpdateTask = () => {
                     className="textarea dark:bg-gray-700 dark:text-white textarea-bordered w-full resize-none"
                     placeholder="Description"
                     defaultValue={data?.description}
+                    data-aos="zoom-in"
                   ></textarea>
                 )}
                 name="description"
@@ -147,6 +148,7 @@ const UpdateTask = () => {
                     type="date"
                     defaultValue={data?.deadline}
                     className="w-full dark:bg-gray-700 dark:text-white input input-bordered"
+                    data-aos="zoom-in"
                   />
                 )}
                 name="deadline"
@@ -164,6 +166,7 @@ const UpdateTask = () => {
                   <select
                     {...field}
                     className="w-full dark:bg-gray-700 dark:text-white input input-bordered"
+                    data-aos="zoom-in"
                   >
                     <option value="low" selected={data?.priority === "low"}>
                       Low
@@ -190,7 +193,7 @@ const UpdateTask = () => {
                 </span>
               )}
             </div>
-            <div>
+            <div data-aos="zoom-in">
               <button className="btn btn-block rounded-sm bg-success border-none text-white hover:bg-success">
                 Update
               </button>

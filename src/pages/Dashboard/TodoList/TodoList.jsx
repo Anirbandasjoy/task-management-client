@@ -5,8 +5,11 @@ import useFetchTask from "../../../hooks/useFetchTask";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 const TodoList = () => {
   const { data, refetch } = useFetchTask("todo");
+  const { refetch: ongoingRefetch } = useFetchTask("ongoing");
+  const { refetch: completeRefetch } = useFetchTask("complete");
   console.log(data);
   const handleDeleteTask = async (id) => {
     try {
@@ -33,6 +36,40 @@ const TodoList = () => {
       console.log(error);
     }
   };
+  const [selectedStatus, setSelectedStatus] = useState("ongoing");
+  // const [selectedTaskId, setSelectedTaskId] = useState(null);
+
+  const handleChangeStatus = async (e, id) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.patch(
+        `http://localhost:5000/api/v1/update-status/${id}`,
+        { status: selectedStatus }
+      );
+      console.log(data);
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Status Updated Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "sweetalert-custom-popup",
+          title: "sweetalert-custom-title",
+          content: "sweetalert-custom-content",
+          background: "sweetalert-custom-background",
+        },
+        backdrop: false,
+      });
+
+      refetch();
+      ongoingRefetch();
+      completeRefetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <Title title="Todo List" />
@@ -42,6 +79,7 @@ const TodoList = () => {
             <div
               key={task?._id}
               className="bg-gray-100  flex lg:items-center flex-col lg:flex-row lg:justify-between dark:bg-gray-800 p-4 border cursor-pointer border-blue-200"
+              data-aos="zoom-in"
             >
               <div>
                 <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">
@@ -60,8 +98,54 @@ const TodoList = () => {
                     <h2 className="dark:text-gray-300">{task?.priority}</h2>
                   </div>
                 </div>
+                {/* modal code start */}
+                <button
+                  onClick={() =>
+                    document.getElementById("my_modal_3").showModal()
+                  }
+                  className="btn btn-sm rounded-sm text-gray-200 dark:bg-gray-800 text-xs w-28 mt-5 btn-success"
+                >
+                  Change Status
+                </button>
+
+                <dialog id="my_modal_3" className="modal ">
+                  <div className="modal-box dark:bg-gray-800 rounded-md">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn btn-sm dark:text-gray-300 btn-circle btn-ghost absolute right-2 top-2">
+                        ✕
+                      </button>
+                    </form>
+                    <h3 className="font-bold text-lg text-center dark:text-gray-300">
+                      Change Status
+                    </h3>
+                    <div className="py-4 text-center">
+                      <br />
+                      <form
+                        onSubmit={(e) => handleChangeStatus(e, task?._id)}
+                        method="dialog"
+                      >
+                        <select
+                          value={selectedStatus}
+                          onChange={(e) => setSelectedStatus(e.target.value)}
+                          className="select select-bordered w-full max-w-xs dark:bg-gray-700 dark:text-gray-300"
+                        >
+                          <option value="todo" disabled selected>
+                            todo
+                          </option>
+                          <option value="ongoing">ongoing</option>
+                          <option value="complete">complete</option>
+                        </select>
+                        <button className="btn ml-4 rounded-sm text-gray-200 btn-md btn-success">
+                          Change
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+                {/* modal code end */}
               </div>
-              <div className="flex lg:flex-col flex-row gap-5 pl-3 mt-5 lg:mt-0 ">
+              <div className="flex lg:flex-col flex-row gap-3 lg:gap-5 lg:pl-3 mt-3 lg:mt-0 ">
                 <button
                   onClick={() => handleDeleteTask(task?._id)}
                   className="btn btn-sm rounded-sm text-gray-200 text-xs w-16 btn-success"

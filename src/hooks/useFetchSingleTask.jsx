@@ -6,7 +6,7 @@ const useFetchSingleTask = (id) => {
     queryKey: ["single-task-data", id],
     queryFn: async () => {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/get-single-task/${id}`
+        `https://task-management-server-three-woad.vercel.app/api/v1/get-single-task/${id}`
       );
       return response.data;
     },

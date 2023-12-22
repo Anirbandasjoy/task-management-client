@@ -37,7 +37,7 @@ const About = () => {
             Bangladesh{" "}
             <span style={{ color: "red", fontWeight: "bold" }}>
               <Typewriter
-                words={["Best Travel  Agency Company Since 2023"]}
+                words={["Task Manager Agency Company Since 2023"]}
                 loop={loopCount}
                 cursor
                 cursorStyle="❤️"

@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FaGithub } from "react-icons/fa6";
 import * as yup from "yup";
 
 import Lottie from "lottie-react";
@@ -14,7 +15,7 @@ import { FcOrgUnit } from "react-icons/fc";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [loginError, setLoginError] = useState("");
-  const { loginUser, googleLoginUser, loading, setLoading } =
+  const { loginUser, googleLoginUser, githubLoginUser, loading, setLoading } =
     useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -51,6 +52,14 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     const userCredential = await googleLoginUser();
+    console.log(userCredential.user);
+
+    toast.success("Login Successfully");
+    navigate("/");
+  };
+
+  const handleGithubLogin = async () => {
+    const userCredential = await githubLoginUser();
     console.log(userCredential.user);
 
     toast.success("Login Successfully");
@@ -189,6 +198,14 @@ const Login = () => {
                   />
                 </svg>
                 Sign in with Google
+              </button>
+              <button
+                onClick={handleGithubLogin}
+                type="button"
+                className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-xs px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+              >
+                <FaGithub size={17} className="mr-2" />
+                Sign in with Github
               </button>
             </div>
 

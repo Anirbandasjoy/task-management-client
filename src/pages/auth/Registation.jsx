@@ -9,12 +9,19 @@ import { AuthContext } from "../../context/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
 import { FcOrgUnit } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa6";
 
 const Registation = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [registerError, setRegisterError] = useState("");
-  const { registerUser, logOut, googleLoginUser, loading, setLoading } =
-    useContext(AuthContext);
+  const {
+    registerUser,
+    logOut,
+    googleLoginUser,
+    githubLoginUser,
+    loading,
+    setLoading,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -63,6 +70,14 @@ const Registation = () => {
   const handleGoogleLogin = async () => {
     const userCredential = await googleLoginUser();
     console.log(userCredential.user);
+    toast.success("Login Successfully");
+    navigate("/");
+  };
+
+  const handleGithubLogin = async () => {
+    const userCredential = await githubLoginUser();
+    console.log(userCredential.user);
+
     toast.success("Login Successfully");
     navigate("/");
   };
@@ -211,6 +226,14 @@ const Registation = () => {
                   />
                 </svg>
                 Sign in with Google
+              </button>
+              <button
+                onClick={handleGithubLogin}
+                type="button"
+                className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-xs px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+              >
+                <FaGithub size={17} className="mr-2" />
+                Sign in with Github
               </button>
             </div>
           </form>

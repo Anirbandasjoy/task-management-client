@@ -14,7 +14,7 @@ const TodoList = () => {
   const handleDeleteTask = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/v1/task-delete/${id}`
+        `https://task-management-server-three-woad.vercel.app/api/v1/task-delete/${id}`
       );
       console.log(data);
       Swal.fire({
@@ -43,7 +43,7 @@ const TodoList = () => {
     e.preventDefault();
     try {
       const { data } = await axios.patch(
-        `http://localhost:5000/api/v1/update-status/${id}`,
+        `https://task-management-server-three-woad.vercel.app/api/v1/update-status/${id}`,
         { status: selectedStatus }
       );
       console.log(data);

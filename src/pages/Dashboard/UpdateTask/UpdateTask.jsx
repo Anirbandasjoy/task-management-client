@@ -45,7 +45,7 @@ const UpdateTask = () => {
       };
       console.log({ taskInformation });
       const response = await axios.put(
-        `http://localhost:5000/api/v1/update-task/${id}`,
+        `https://task-management-server-three-woad.vercel.app/api/v1/update-task/${id}`,
         taskInformation
       );
 

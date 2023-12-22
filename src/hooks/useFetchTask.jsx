@@ -9,7 +9,7 @@ const useFetchTask = (status) => {
     queryKey: ["task-data", user?.email, status],
     queryFn: async () => {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/todolist/${user?.email}?status=${status}`
+        `https://task-management-server-three-woad.vercel.app/api/v1/todolist/${user?.email}?status=${status}`
       );
       return response.data;
     },

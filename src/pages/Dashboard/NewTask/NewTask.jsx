@@ -153,6 +153,7 @@ const NewTask = () => {
                 name="priority"
                 control={control}
                 rules={{ required: "Priority is required" }}
+                defaultValue="Low"
               />
               {errors.priority && (
                 <span className="text-xs text-red-500">

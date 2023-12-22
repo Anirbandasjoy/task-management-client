@@ -1,23 +1,36 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetchSingleTask from "../../../hooks/useFetchSingleTask";
 import { Controller, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import useFetchTask from "../../../hooks/useFetchTask";
 import { AuthContext } from "../../../context/AuthProvider";
 import Title from "../../../components/Title/Title";
 
 const UpdateTask = () => {
+  const { id } = useParams();
+  const { data } = useFetchSingleTask(id);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const { refetch } = useFetchTask("todo");
   const { refetch: ongoingfetch } = useFetchTask("ongoing");
   const { refetch: completefetch } = useFetchTask("complete");
   const {
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (data) {
+      setValue("title", data.title);
+      setValue("description", data.description);
+      setValue("deadline", data.deadline);
+      setValue("priority", data.priority);
+    }
+  }, [data, setValue]);
 
   const onSubmit = async (data) => {
     try {
@@ -30,12 +43,12 @@ const UpdateTask = () => {
         email: user?.email,
         status: "todo",
       };
-      console.log(taskInformation);
-
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/create-task",
+      console.log({ taskInformation });
+      const response = await axios.put(
+        `http://localhost:5000/api/v1/update-task/${id}`,
         taskInformation
       );
+
       console.log("Server Response:", response.data);
       Swal.fire({
         position: "center",
@@ -45,22 +58,22 @@ const UpdateTask = () => {
         timer: 1500,
         customClass: {
           popup: "sweetalert-custom-popup",
-          title: "sweetalert-custom-title", // Custom class for the title
-          content: "sweetalert-custom-content", // Custom class for the content
+          title: "sweetalert-custom-title",
+          content: "sweetalert-custom-content",
           background: "sweetalert-custom-background",
         },
         backdrop: false,
       });
+
       refetch();
       completefetch();
       ongoingfetch();
+      navigate("/dashboard/todo-list");
     } catch (error) {
       console.error("Error during request:", error);
     }
   };
-  const { id } = useParams();
-  const { data } = useFetchSingleTask(id);
-  console.log(data);
+
   return (
     <div>
       <Title title="Update Task" />
@@ -179,7 +192,7 @@ const UpdateTask = () => {
             </div>
             <div>
               <button className="btn btn-block rounded-sm bg-success border-none text-white hover:bg-success">
-                Save
+                Update
               </button>
             </div>
           </form>

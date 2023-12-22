@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import Use from "../../components/Use/Use";
 const Home = () => {
   return (
     <div>
@@ -22,6 +23,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Use />
     </div>
   );
 };

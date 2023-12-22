@@ -4,6 +4,7 @@ import { RxUpdate } from "react-icons/rx";
 import useFetchTask from "../../../hooks/useFetchTask";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 const TodoList = () => {
   const { data, refetch } = useFetchTask("todo");
   console.log(data);
@@ -67,9 +68,12 @@ const TodoList = () => {
                 >
                   Delete
                 </button>
-                <button className="btn btn-sm rounded-sm text-gray-200 text-xs w-16 btn-success">
+                <Link
+                  to={`/dashboard/task-update/${task?._id}`}
+                  className="btn btn-sm rounded-sm text-gray-200 text-xs w-16 btn-success"
+                >
                   Edit
-                </button>
+                </Link>
               </div>
             </div>
           );

@@ -7,6 +7,7 @@ import MenuItem from "./Menuitem";
 
 // Icons
 import { GrLogout } from "react-icons/gr";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
@@ -124,6 +125,11 @@ const Sidebar = () => {
                 address="/dashboard/complete-list"
                 count={complete?.length}
               />
+              <MenuItem
+                icon={AiOutlineUserAdd}
+                label="Profile"
+                address="/dashboard/profile"
+              />
 
               {/* Menu Items */}
             </nav>
@@ -131,7 +137,7 @@ const Sidebar = () => {
         </div>
 
         <div>
-          <div className="h-[3px] w-full dark:bg-gray-800"></div>
+          <div className="dark:h-[3px] h-[2px] w-full bg-gray-200 dark:bg-gray-800"></div>
           <MenuItem
             icon={FcSettings}
             label="Settings"

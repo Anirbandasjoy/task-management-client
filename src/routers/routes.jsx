@@ -12,6 +12,7 @@ import Registation from "../pages/auth/Registation";
 import PribetRoutes from "./PribetRoutes";
 import OngoingList from "../pages/Dashboard/OngoingLIst/OngoingList";
 import Complete from "../pages/Dashboard/Complete/Complete";
+import UpdateTask from "../pages/Dashboard/UpdateTask/UpdateTask";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,14 @@ export const router = createBrowserRouter([
       {
         path: "complete-list",
         element: <Complete />,
+      },
+      {
+        path: "task-update/:id",
+        element: <UpdateTask />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
